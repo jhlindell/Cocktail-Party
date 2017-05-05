@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"> -->
   <link rel="stylesheet" href="main.css">
   <title>Cocktail Party</title>
 </head>
@@ -50,7 +51,13 @@
               <h3 class="panel-title">Recipe Card</h3>
             </div>
             <div class="panel-body">
-              Recipe stuff
+              <div class="row">
+                Recipe stuff
+              </div>
+              <div class="row recipeButtonRow">
+                <button>Update Recipe</button>
+                <button>Delete Recipe</button>
+              </div>
             </div>
           </div>
         </div>
@@ -60,7 +67,13 @@
               <h3 class="panel-title">Recipe Card</h3>
             </div>
             <div class="panel-body">
-              Recipe stuff
+              <div class="row">
+                Recipe stuff
+              </div>
+              <div class="row recipeButtonRow">
+                <button>Update Recipe</button>
+                <button>Delete Recipe</button>
+              </div>
             </div>
           </div>
         </div>
@@ -70,47 +83,95 @@
       </div>
 
       <div id="recipeBox" class="row">
-        <form>
+        <div id="form">
           <div class="col-md-7 col-sm-12 recipeBox">
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">Recipe Information</h3>
               </div>
               <div class="panel-body">
-                <div class="input-group col-md-9 col-sm-12 partyInfo">
-                  <span class="input-group-addon" id="drinkName">Drink Name</span>
-                  <input type="text" class="form-control" placeholder="Drink Name" aria-describedby="drinkName" required>
+                <div class="row">
+                  <div class="input-group col-md-9 col-sm-12 partyInfo">
+                    <span class="input-group-addon" id="drinkName">Drink Name</span>
+                    <input type="text" class="form-control" placeholder="Drink Name" aria-describedby="drinkName" required>
+                  </div>
                 </div>
-                <div>
-                  <br/> Ingredients:
+                <div class="row">
+                  <div>
+                    <h2>Ingredients:</h2>
+                  </div>
+                  <div id="ingredients">
+                    <div class="ingredient">
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label>Measure</label>
+                          <input type="text" class="form-control" placeholder="#">
+                        </div>
+                        <div class="col-md-2">
+                          <label>Unit</label>
+                          <select class="selectpicker form-control">
+                          <option>oz</option>
+                          <option>cup</option>
+                          <option>tsp</option>
+                          <option>tbsp</option>
+                          <option>dash</option>
+                        </select>
+                        </div>
+                        <div class="col-md-8">
+                          <label>Ingredient Name</label>
+                          <input type="text" class="form-control" placeholder="Ingredient Name">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div id="ingClone" class="ingredient" style="display: none;">
+                      <div class="row">
+                        <div class="col-md-2">
+                          <input type="text" class="form-control" placeholder="#">
+                        </div>
+                        <div class="col-md-2">
+                          <select class="selectpicker form-control">
+                            <option>oz</option>
+                            <option>cup</option>
+                            <option>tsp</option>
+                            <option>tbsp</option>
+                            <option>dash</option>
+                          </select>
+                        </div>
+                        <div class="col-md-8">
+                          <input type="text" class="form-control" placeholder="Ingredient Name">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <span class="col-md-2">
-                    <input type="text" class="form-control" placeholder="#" required>
-                  </span>
-                  <span class="col-md-3">
-                      <select class="selectpicker">
-                        <option>oz</option>
-                        <option>cup</option>
-                        <option>tsp</option>
-                        <option>tbsp</option>
-                        <option>dash</option>
-                      </select>
-                  </span>
-                  <span class="col-md-7">
-                    <input type="text" class="form-control" placeholder="Ingredient Name" required>
-                  </span>
+                <div class="row">
+                  <div id="addIngButton">
+                    <button>Add Ingredient</button>
+                  </div>
+                </div>
+                <div id="instructions" class="row">
+                  <label>Instructions</label>
+                  <textarea type="textarea" class="form-control" placeholder="Instructions"></textarea>
+                </div>
+                <div id="description" class="row">
+                  <label>Description</label>
+                  <textarea type="textarea" class="form-control" placeholder="Description"></textarea>
+                </div>
+                <div id="addDrink" class="row">
+                  <button>Update Recipe</button>
                 </div>
               </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </main>
   <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script> -->
   <script src="main.js"></script>
 </body>
 

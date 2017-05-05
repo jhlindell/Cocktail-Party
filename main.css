@@ -35,3 +35,24 @@
   display: inline-block;
   float:none;
 }
+
+#addIngButton {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.ingredient {
+  margin-bottom: 10px;
+}
+
+#addDrink {
+  margin-top: 10px;
+}
+
+.recipeButtonRow {
+  margin-top: 10px;
+}
+
+#description {
+  margin-top:10px;
+}
