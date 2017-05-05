@@ -1,0 +1,37 @@
+#brand {
+  margin: 0;
+}
+
+#recipes{
+  text-align: center;
+}
+
+.recipeCards {
+  display:inline-block;
+  float: none;
+  width: 33%;
+}
+
+#partyInfo {
+  text-align: center;
+  margin-bottom: 15px;
+}
+.partyInfo {
+  display: inline-table;
+  float: none;
+}
+
+#addButton {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#recipeBox{
+  text-align: center;
+}
+
+.recipeBox {
+  /*width: 60%;*/
+  display: inline-block;
+  float:none;
+}
