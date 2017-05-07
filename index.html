@@ -55,8 +55,8 @@
                 Recipe stuff
               </div>
               <div class="row recipeButtonRow">
-                <button>Update Recipe</button>
-                <button>Delete Recipe</button>
+                <button class="updateRecipe">Update Recipe</button>
+                <button class="deleteButton">Delete Recipe</button>
               </div>
             </div>
           </div>
@@ -71,29 +71,29 @@
                 Recipe stuff
               </div>
               <div class="row recipeButtonRow">
-                <button>Update Recipe</button>
-                <button>Delete Recipe</button>
+                <button class="updateRecipe">Update Recipe</button>
+                <button class="deleteButton">Delete Recipe</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div id="addButton" class="row">
+      <div id="addRecipeButton" class="row">
         <button>Add Recipe</button>
       </div>
 
       <div id="recipeBox" class="row">
         <div id="form">
-          <div class="col-md-7 col-sm-12 recipeBox">
-            <div class="panel panel-default">
+          <div class="col-md-7 col-sm-12 recipeBox" style="display: none;">
+            <div class="panel panel-primary">
               <div class="panel-heading">
                 <h3 class="panel-title">Recipe Information</h3>
               </div>
               <div class="panel-body">
                 <div class="row">
                   <div class="input-group col-md-9 col-sm-12 partyInfo">
-                    <span class="input-group-addon" id="drinkName">Drink Name</span>
-                    <input type="text" class="form-control" placeholder="Drink Name" aria-describedby="drinkName" required>
+                    <span class="input-group-addon" >Drink Name</span>
+                    <input type="text" id="drinkName" class="form-control" placeholder="Drink Name" aria-describedby="drinkName" required>
                   </div>
                 </div>
                 <div class="row">
@@ -105,7 +105,7 @@
                       <div class="row">
                         <div class="col-md-2">
                           <label>Measure</label>
-                          <input type="text" class="form-control" placeholder="#">
+                          <input type="text" class="form-control measure" placeholder="#">
                         </div>
                         <div class="col-md-2">
                           <label>Unit</label>
@@ -119,7 +119,7 @@
                         </div>
                         <div class="col-md-8">
                           <label>Ingredient Name</label>
-                          <input type="text" class="form-control" placeholder="Ingredient Name">
+                          <input type="text" class="form-control ingName" placeholder="Ingredient Name">
                         </div>
                       </div>
                     </div>
@@ -150,16 +150,16 @@
                     <button>Add Ingredient</button>
                   </div>
                 </div>
-                <div id="instructions" class="row">
+                <div class="row">
                   <label>Instructions</label>
-                  <textarea type="textarea" class="form-control" placeholder="Instructions"></textarea>
+                  <textarea id="instructions" type="textarea" class="form-control" placeholder="Instructions"></textarea>
                 </div>
-                <div id="description" class="row">
+                <div class="row">
                   <label>Description</label>
-                  <textarea type="textarea" class="form-control" placeholder="Description"></textarea>
+                  <textarea id="description" type="textarea" class="form-control" placeholder="Description"></textarea>
                 </div>
                 <div id="addDrink" class="row">
-                  <button>Update Recipe</button>
+                  <button class="updateRecipeButton">Update Recipe</button>
                 </div>
               </div>
             </div>
