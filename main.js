@@ -30,7 +30,28 @@ var jungleBird = {
   instructions: "shake and serve over ice",
   description: "the best tiki drink ever"
 };
+var oldFashioned = {
+  name: "Old Fashioned",
+  ingredients: [
+    { measure:2.0,
+      unit: "oz",
+      ingredientName: "Rittenhouse Rye" },
+    { measure:0.3,
+      unit: "oz",
+      ingredientName: "Simple Syrup" },
+    { measure:2.0,
+      unit: "dash",
+      ingredientName: "Angostura Bitters" },
+    { measure:1.0,
+      unit: "each",
+      ingredientName: "Luxardo Cherry" }
+  ],
+  instructions: "Build in glass over ice",
+  description: "the old classic"
+};
 recipeObjectArray.push(jungleBird);
+recipeObjectArray.push(oldFashioned);
+initializePage(recipeObjectArray);
 
 //adds another recipe card to the #recipes row
 function addRecipeCard(event) {
@@ -52,7 +73,6 @@ function addRecipeCard(event) {
     if(recipeCounter === 6) {
       $("#addRecipeButton").toggle();
     }
-    recipeObjectArray.push({});
   }
 }
 
@@ -77,7 +97,9 @@ function recipeCardClick(event) {
 //removes a recipe card from the #recipes row
 function removeCard(event) {
   let $target = $(event.target).parent().parent().parent().parent();
-  removedCardNumbers.push($target[0].dataset.recipe);
+  let cardNumber = $target[0].dataset.recipe;
+  removedCardNumbers.push(cardNumber);
+  recipeObjectArray.splice(cardNumber-1, 1);
   $target.remove();
   recipeCounter--;
 }
@@ -96,8 +118,9 @@ function updateRecipe(event){
   if($(event.target).hasClass("updateRecipeButton")){
     let $selectedCard = $recipes.find(".panel-primary");
     let $button = $selectedCard.find(".updateRecipe");
+    let recipeNumber = $selectedCard.parent()[0].dataset.recipe;
     buildRecipeObject();
-    populateCard();
+    populateCard(recipeNumber);
     $selectedCard.removeClass("panel-primary");
     $selectedCard.addClass("panel-default");
     $($recipeBox).toggle();
@@ -124,14 +147,14 @@ function buildRecipeObject(){
     }
   });
   //saveObject(recipeObj);
-  return recipeObj;
 }
 
-function populateCard(){
-  let $selectedCard = $recipes.find(".panel-primary");
-  let recipeNumber = $selectedCard.parent()[0].dataset.recipe;
+function populateCard(num){
+  let $selectedCard = $recipes.find("[data-recipe='" + num + "']");
+  let recipeNumber = $selectedCard[0].dataset.recipe;
   let recipe = recipeObjectArray[recipeNumber - 1];
   let $recipeBody = $selectedCard.find(".recipeBody");
+  $recipeBody.empty();
   //drink name
   let $recipeNameDiv = $("<div>");
   let $recipeNameH4 = $("<h4>");
@@ -181,5 +204,21 @@ function populateCard(){
 function saveObject(recipeObj) {
   let $selectedCard = $recipes.find(".panel-primary").parent();
   let recipeNumber = $selectedCard[0].dataset.recipe;
-  recipeObjectArray[recipeNumber] = recipeObj;
+  recipeObjectArray[recipeNumber - 1] = recipeObj;
+  //console.log(recipeObjectArray);
+}
+
+function initializePage(array){
+  let numRecipies = array.length;
+  for(let i = 0; i < numRecipies; i++){
+    if (i === 0) {
+      populateCard(1);
+    } else {
+      addRecipeCard();
+      populateCard(i+1);
+    }
+  }
+  //test local storage
+  // localStorage.setItem('recipes', JSON.stringify(recipeObjectArray));
+  // let recipies = JSON.parse(localStorage.getItem('recipes'));
 }
