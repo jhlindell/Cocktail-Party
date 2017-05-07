@@ -45,14 +45,14 @@
         </div>
       </div>
       <div id="recipes" class="row">
-        <div class="col-md-4 col-sm-12 recipeCards">
+        <div class="col-md-4 col-sm-12 recipeCards" data-recipe="1">
           <div class="panel panel-default">
             <div class="panel-heading text-center">
-              <h3 class="panel-title">Recipe Card</h3>
+              <h3 class="panel-title">Recipe 1</h3>
             </div>
             <div class="panel-body">
-              <div class="row">
-                Recipe stuff
+              <div class="row recipeBody">
+
               </div>
               <div class="row recipeButtonRow">
                 <button class="updateRecipe">Update Recipe</button>
@@ -64,11 +64,11 @@
         <div id="cardClone" class="col-md-4 col-sm-12 recipeCards" style="display: none;">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Recipe Card</h3>
+              <h3 class="panel-title">Recipe</h3>
             </div>
             <div class="panel-body">
-              <div class="row">
-                Recipe stuff
+              <div class="row recipeBody">
+
               </div>
               <div class="row recipeButtonRow">
                 <button class="updateRecipe">Update Recipe</button>
@@ -124,7 +124,7 @@
                       </div>
                     </div>
 
-                    <div id="ingClone" class="ingredient" style="display: none;">
+                    <div class="ingredient ingClone" style="display: none;">
                       <div class="row">
                         <div class="col-md-2">
                           <input type="text" class="form-control" placeholder="#">
