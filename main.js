@@ -3,6 +3,7 @@ $("#addIngButton").on("click", addIngredient);
 $("#recipeBox").on("click", updateRecipe);
 $(".loadButton").on("click", loadRecipes);
 $(".saveButton").on("click", saveRecipes);
+$(".clearButton").on("click", clearSession);
 var $recipes = $("#recipes");
 $recipes.on("click", recipeCardClick);
 var $ingredients = $("#ingredients");
@@ -15,6 +16,11 @@ for (var key in localStorage) {
   partyNames.push(key);
 }
 
+//loads session from local storage
+clearRecipes();
+recipeObjectArray = JSON.parse(localStorage.getItem('sessionPersistance'));
+initializePage(recipeObjectArray);
+
 //adds another recipe card to the #recipes row
 function addRecipeCard(event) {
   if (recipeCounter < 6) {
@@ -22,6 +28,7 @@ function addRecipeCard(event) {
     let $clone = $("#cardClone").clone();
     $clone.toggle();
     $clone.removeAttr("id");
+    $clone.addClass("recipeCards");
     if (removedCardNumbers.length) {
       removedCardNumbers.sort();
       let cardNum = removedCardNumbers.shift();
@@ -89,6 +96,7 @@ function updateRecipe(event) {
     $($recipeBox).toggle();
     let $buttons = $("#recipes .updateRecipe");
     $buttons.toggle();
+    persistRecipes();
   }
 }
 
@@ -174,12 +182,8 @@ function saveObject(recipeObj) {
 function initializePage(array) {
   let numRecipies = array.length;
   for (let i = 0; i < numRecipies; i++) {
-    if (i === 0) {
-      populateCard(1);
-    } else {
       addRecipeCard();
       populateCard(i + 1);
-    }
   }
 }
 
@@ -229,9 +233,11 @@ function loadRecipes() {
   // recipeObjectArray = [];
   // recipeObjectArray.push(jungleBird);
   // recipeObjectArray.push(oldFashioned);
+  clearRecipes();
   loadName = prompt(printPartyNames());
   recipeObjectArray = JSON.parse(localStorage.getItem(loadName));
   initializePage(recipeObjectArray);
+  persistRecipes();
 }
 
 function printPartyNames() {
@@ -270,4 +276,21 @@ function populateRecipeBox() {
       $clone.appendTo($ingredients);
     }
   }
+}
+
+function persistRecipes() {
+  localStorage.setItem('sessionPersistance', JSON.stringify(recipeObjectArray));
+}
+
+function clearSession() {
+  $("#recipes .recipeCards").remove();
+  recipeCounter = 0;
+  recipeObjectArray = [];
+  persistRecipes();
+}
+
+function clearRecipes(){
+  $("#recipes .recipeCards").remove();
+  recipeCounter = 0;
+  recipeObjectArray = [];
 }
