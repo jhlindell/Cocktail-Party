@@ -15,11 +15,15 @@ var partyNames = [];
 for (var key in localStorage) {
   partyNames.push(key);
 }
+var currentParty = {recipes:[]};
 
 //loads session from local storage
 clearRecipes();
-recipeObjectArray = JSON.parse(localStorage.getItem('sessionPersistance'));
-initializePage(recipeObjectArray);
+currentParty = JSON.parse(localStorage.getItem('sessionPersistance'));
+recipeObjectArray = currentParty.recipes;
+if(currentParty.hasOwnProperty('recipes')){
+  initializePage();
+}
 
 //adds another recipe card to the #recipes row
 function addRecipeCard(event) {
@@ -179,12 +183,15 @@ function saveObject(recipeObj) {
   recipeObjectArray[recipeNumber - 1] = recipeObj;
 }
 
-function initializePage(array) {
-  let numRecipies = array.length;
+function initializePage() {
+  let numRecipies = currentParty.recipes.length;
   for (let i = 0; i < numRecipies; i++) {
       addRecipeCard();
       populateCard(i + 1);
   }
+  $("#partyName").val(currentParty.name);
+  $("#partyDate").val(currentParty.date);
+  $("#guestCount").val(currentParty.guestCount);
 }
 
 //loading from local storage
@@ -235,8 +242,9 @@ function loadRecipes() {
   // recipeObjectArray.push(oldFashioned);
   clearRecipes();
   loadName = prompt(printPartyNames());
-  recipeObjectArray = JSON.parse(localStorage.getItem(loadName));
-  initializePage(recipeObjectArray);
+  currentParty = JSON.parse(localStorage.getItem(loadName));
+  recipeObjectArray = currentParty.recipes;
+  initializePage();
   persistRecipes();
 }
 
@@ -252,9 +260,12 @@ function printPartyNames() {
 
 //simple persistance to local storage
 function saveRecipes() {
-  saveName = $("#partyName").val();
-  partyNames.push(saveName);
-  localStorage.setItem(saveName, JSON.stringify(recipeObjectArray));
+  currentParty.name = $("#partyName").val();
+  currentParty.date = $("#partyDate").val();
+  currentParty.guestCount = $("#guestCount").val();
+  currentParty.recipes = recipeObjectArray;
+  partyNames.push(currentParty.name);
+  localStorage.setItem(currentParty.name, JSON.stringify(currentParty));
 }
 
 //populates recipebox with object info
@@ -279,13 +290,17 @@ function populateRecipeBox() {
 }
 
 function persistRecipes() {
-  localStorage.setItem('sessionPersistance', JSON.stringify(recipeObjectArray));
+  localStorage.setItem('sessionPersistance', JSON.stringify(currentParty));
 }
 
 function clearSession() {
   $("#recipes .recipeCards").remove();
   recipeCounter = 0;
   recipeObjectArray = [];
+  currentParty = {};
+  $("#partyName").val('');
+  $("#partyDate").val('');
+  $("#guestCount").val('');
   persistRecipes();
 }
 

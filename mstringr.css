@@ -1,0 +1,13 @@
+#title {
+  text-align: center;
+}
+
+.ingredientTable {
+  text-align: center;
+  display: inline-block;
+  float: none;
+}
+
+@page {
+  size:8.5in 11in;
+}
