@@ -9,7 +9,11 @@ var $ingredients = $("#ingredients");
 var $recipeBox = $(".recipeBox");
 var recipeCounter = 1;
 var recipeObjectArray = [];
-var removedCardNumbers =[];
+var removedCardNumbers = [];
+var partyNames = [];
+for (var key in localStorage) {
+  partyNames.push(key);
+}
 
 //adds another recipe card to the #recipes row
 function addRecipeCard(event) {
@@ -18,7 +22,7 @@ function addRecipeCard(event) {
     let $clone = $("#cardClone").clone();
     $clone.toggle();
     $clone.removeAttr("id");
-    if(removedCardNumbers.length){
+    if (removedCardNumbers.length) {
       removedCardNumbers.sort();
       let cardNum = removedCardNumbers.shift();
       $clone.attr("data-recipe", cardNum);
@@ -28,7 +32,7 @@ function addRecipeCard(event) {
       $clone.find(".panel-title").html("Recipe " + recipeCounter);
     }
     $clone.appendTo($recipes);
-    if(recipeCounter === 6) {
+    if (recipeCounter === 6) {
       $("#addRecipeButton").toggle();
     }
   }
@@ -44,10 +48,10 @@ function addIngredient(event) {
 
 //triggers the click event on a recipe card for the update or delete buttons
 function recipeCardClick(event) {
-  if($(event.target).hasClass("deleteButton")){
+  if ($(event.target).hasClass("deleteButton")) {
     removeCard(event);
   }
-  if($(event.target).hasClass("updateRecipe")) {
+  if ($(event.target).hasClass("updateRecipe")) {
     selectRecipeCard(event);
   }
 }
@@ -57,37 +61,39 @@ function removeCard(event) {
   let $target = $(event.target).parent().parent().parent().parent();
   let cardNumber = $target[0].dataset.recipe;
   removedCardNumbers.push(cardNumber);
-  recipeObjectArray.splice(cardNumber-1, 1);
+  recipeObjectArray.splice(cardNumber - 1, 1);
   $target.remove();
   recipeCounter--;
 }
 
 //makes a recipe card active after its update recipe button was clicked
-function selectRecipeCard(event){
+function selectRecipeCard(event) {
   let $target = $(event.target).parent().parent().parent();
   $target.removeClass("panel-default");
   $target.addClass("panel-primary");
   $($recipeBox).toggle();
-  $(event.target).toggle();
+  populateRecipeBox();
+  let $buttons = $("#recipes .updateRecipe");
+  $buttons.toggle();
 }
 
 //once recipe info is entered in #recipeBox, it is saved to object and sent back to the active recipe card
-function updateRecipe(event){
-  if($(event.target).hasClass("updateRecipeButton")){
+function updateRecipe(event) {
+  if ($(event.target).hasClass("updateRecipeButton")) {
     let $selectedCard = $recipes.find(".panel-primary");
-    let $button = $selectedCard.find(".updateRecipe");
     let recipeNumber = $selectedCard.parent()[0].dataset.recipe;
     buildRecipeObject();
     populateCard(recipeNumber);
     $selectedCard.removeClass("panel-primary");
     $selectedCard.addClass("panel-default");
     $($recipeBox).toggle();
-    $button.toggle();
+    let $buttons = $("#recipes .updateRecipe");
+    $buttons.toggle();
   }
 }
 
 //builds a recipe object from entered information and saves it to array
-function buildRecipeObject(){
+function buildRecipeObject() {
   let recipeObj = {};
   recipeObj.name = $("#drinkName").val();
   recipeObj.instructions = $("#instructions").val();
@@ -95,8 +101,8 @@ function buildRecipeObject(){
   recipeObj.ingredients = [];
   let $ingredients = $("#ingredients").children();
   //console.log($ingredients);
-  $($ingredients).each(function(){
-    if(!$(this).hasClass("ingClone")){
+  $($ingredients).each(function() {
+    if (!$(this).hasClass("ingClone")) {
       let ingredientObj = {};
       ingredientObj.measure = $(this).find(".measure").val();
       ingredientObj.ingredientName = $(this).find(".ingName").val();
@@ -107,7 +113,7 @@ function buildRecipeObject(){
   saveObject(recipeObj);
 }
 
-function populateCard(num){
+function populateCard(num) {
   let $selectedCard = $recipes.find("[data-recipe='" + num + "']");
   let recipeNumber = $selectedCard[0].dataset.recipe;
   let recipe = recipeObjectArray[recipeNumber - 1];
@@ -122,7 +128,7 @@ function populateCard(num){
   //ingredients
   let $table = $("<table>");
   $table.addClass("table-striped");
-  //$table.addClass("table-bordered");
+  $table.addClass("table-styling");
   let $tbody = $("<tbody>");
   $table.append($tbody);
   $(recipe.ingredients).each(function() {
@@ -165,21 +171,19 @@ function saveObject(recipeObj) {
   recipeObjectArray[recipeNumber - 1] = recipeObj;
 }
 
-function initializePage(array){
+function initializePage(array) {
   let numRecipies = array.length;
-  for(let i = 0; i < numRecipies; i++){
+  for (let i = 0; i < numRecipies; i++) {
     if (i === 0) {
       populateCard(1);
     } else {
       addRecipeCard();
-      populateCard(i+1);
+      populateCard(i + 1);
     }
   }
-  //test local storage
-  // localStorage.setItem('recipes', JSON.stringify(recipeObjectArray));
-  // let recipies = JSON.parse(localStorage.getItem('recipes'));
 }
 
+//loading from local storage
 function loadRecipes() {
   // var jungleBird = {
   //   name: "Jungle Bird",
@@ -225,10 +229,45 @@ function loadRecipes() {
   // recipeObjectArray = [];
   // recipeObjectArray.push(jungleBird);
   // recipeObjectArray.push(oldFashioned);
-  recipeObjectArray = JSON.parse(localStorage.getItem('recipes'));
+  loadName = prompt(printPartyNames());
+  recipeObjectArray = JSON.parse(localStorage.getItem(loadName));
   initializePage(recipeObjectArray);
 }
 
-function saveRecipes(){
-  localStorage.setItem('recipes', JSON.stringify(recipeObjectArray));
+function printPartyNames() {
+  let namesString = "";
+  partyNames.forEach(function(element) {
+    namesString += element + "\n";
+  });
+  namesString += "\n";
+  namesString += "Please enter a party name to load:";
+  return namesString;
+}
+
+//simple persistance to local storage
+function saveRecipes() {
+  saveName = $("#partyName").val();
+  partyNames.push(saveName);
+  localStorage.setItem(saveName, JSON.stringify(recipeObjectArray));
+}
+
+//populates recipebox with object info
+function populateRecipeBox() {
+  let $selectedCard = $recipes.find(".panel-primary").parent();
+  let recipeNumber = $selectedCard[0].dataset.recipe;
+  let recipe = recipeObjectArray[recipeNumber - 1];
+  if (recipe) {
+    $("#drinkName").val(recipe.name);
+    $("#instructions").val(recipe.instructions);
+    $("#description").val(recipe.description);
+    $ingredients.find("#staticIngredient").remove();
+    for (let j = 0; j < recipe.ingredients.length; j++) {
+      let $clone = $(".ingClone").clone();
+      $clone.removeClass("ingClone");
+      $clone.find(".measure").val(recipe.ingredients[j].measure);
+      $clone.find(".ingName").val(recipe.ingredients[j].ingredientName);
+      $clone.toggle();
+      $clone.appendTo($ingredients);
+    }
+  }
 }

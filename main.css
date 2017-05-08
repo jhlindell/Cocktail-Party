@@ -56,3 +56,13 @@
 #description {
   margin-top:10px;
 }
+
+.recipeBody{
+  text-align: center;
+}
+
+.table-styling {
+  
+  display: inline-block;
+  float: none;
+}
