@@ -31,6 +31,12 @@
   <main>
     <div class="container">
       <div id="partyInfo" class="row">
+        <div class="col-md-1 loadButton">
+          <button class="btn btn-default">Load</button>
+        </div>
+        <div class="col-md-1 saveButton">
+          <button class="btn btn-default">Save</button>
+        </div>
         <div class="input-group col-md-3 col-sm-12 partyInfo">
           <span class="input-group-addon" id="partyName">Party Name</span>
           <input type="text" class="form-control" placeholder="Party Name" aria-describedby="partyName" required>
@@ -109,7 +115,7 @@
                         </div>
                         <div class="col-md-2">
                           <label>Unit</label>
-                          <select class="selectpicker form-control">
+                          <select class="selectpicker form-control unit">
                           <option>oz</option>
                           <option>cup</option>
                           <option>tsp</option>
@@ -127,10 +133,10 @@
                     <div class="ingredient ingClone" style="display: none;">
                       <div class="row">
                         <div class="col-md-2">
-                          <input type="text" class="form-control" placeholder="#">
+                          <input type="text" class="form-control measure" placeholder="#">
                         </div>
                         <div class="col-md-2">
-                          <select class="selectpicker form-control">
+                          <select class="selectpicker form-control unit">
                             <option>oz</option>
                             <option>cup</option>
                             <option>tsp</option>
@@ -139,7 +145,7 @@
                           </select>
                         </div>
                         <div class="col-md-8">
-                          <input type="text" class="form-control" placeholder="Ingredient Name">
+                          <input type="text" class="form-control ingName" placeholder="Ingredient Name">
                         </div>
                       </div>
                     </div>

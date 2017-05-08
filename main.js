@@ -1,6 +1,8 @@
 $("#addRecipeButton").on("click", addRecipeCard);
 $("#addIngButton").on("click", addIngredient);
 $("#recipeBox").on("click", updateRecipe);
+$(".loadButton").on("click", loadRecipes);
+$(".saveButton").on("click", saveRecipes);
 var $recipes = $("#recipes");
 $recipes.on("click", recipeCardClick);
 var $ingredients = $("#ingredients");
@@ -8,50 +10,6 @@ var $recipeBox = $(".recipeBox");
 var recipeCounter = 1;
 var recipeObjectArray = [];
 var removedCardNumbers =[];
-var jungleBird = {
-  name: "Jungle Bird",
-  ingredients: [
-    { measure:1.5,
-      unit: "oz",
-      ingredientName: "Cruzan Blackstrap Rum" },
-    { measure:1.5,
-      unit: "oz",
-      ingredientName: "Pineapple Juice" },
-    { measure:1.0,
-      unit: "oz",
-      ingredientName: "Campari" },
-    { measure:0.5,
-      unit: "oz",
-      ingredientName: "Lime Juice" },
-    { measure:0.5,
-      unit: "oz",
-      ingredientName: "Simple Syrup" }
-  ],
-  instructions: "shake and serve over ice",
-  description: "the best tiki drink ever"
-};
-var oldFashioned = {
-  name: "Old Fashioned",
-  ingredients: [
-    { measure:2.0,
-      unit: "oz",
-      ingredientName: "Rittenhouse Rye" },
-    { measure:0.3,
-      unit: "oz",
-      ingredientName: "Simple Syrup" },
-    { measure:2.0,
-      unit: "dash",
-      ingredientName: "Angostura Bitters" },
-    { measure:1.0,
-      unit: "each",
-      ingredientName: "Luxardo Cherry" }
-  ],
-  instructions: "Build in glass over ice",
-  description: "the old classic"
-};
-recipeObjectArray.push(jungleBird);
-recipeObjectArray.push(oldFashioned);
-initializePage(recipeObjectArray);
 
 //adds another recipe card to the #recipes row
 function addRecipeCard(event) {
@@ -142,11 +100,11 @@ function buildRecipeObject(){
       let ingredientObj = {};
       ingredientObj.measure = $(this).find(".measure").val();
       ingredientObj.ingredientName = $(this).find(".ingName").val();
-      ingredientObj.unit = "oz";
+      ingredientObj.unit = $(this).find(".unit").val();
       recipeObj.ingredients.push(ingredientObj);
     }
   });
-  //saveObject(recipeObj);
+  saveObject(recipeObj);
 }
 
 function populateCard(num){
@@ -205,7 +163,6 @@ function saveObject(recipeObj) {
   let $selectedCard = $recipes.find(".panel-primary").parent();
   let recipeNumber = $selectedCard[0].dataset.recipe;
   recipeObjectArray[recipeNumber - 1] = recipeObj;
-  //console.log(recipeObjectArray);
 }
 
 function initializePage(array){
@@ -221,4 +178,57 @@ function initializePage(array){
   //test local storage
   // localStorage.setItem('recipes', JSON.stringify(recipeObjectArray));
   // let recipies = JSON.parse(localStorage.getItem('recipes'));
+}
+
+function loadRecipes() {
+  // var jungleBird = {
+  //   name: "Jungle Bird",
+  //   ingredients: [
+  //     { measure:1.5,
+  //       unit: "oz",
+  //       ingredientName: "Cruzan Blackstrap Rum" },
+  //     { measure:1.5,
+  //       unit: "oz",
+  //       ingredientName: "Pineapple Juice" },
+  //     { measure:1.0,
+  //       unit: "oz",
+  //       ingredientName: "Campari" },
+  //     { measure:0.5,
+  //       unit: "oz",
+  //       ingredientName: "Lime Juice" },
+  //     { measure:0.5,
+  //       unit: "oz",
+  //       ingredientName: "Simple Syrup" }
+  //   ],
+  //   instructions: "shake and serve over ice",
+  //   description: "the best tiki drink ever"
+  // };
+  // var oldFashioned = {
+  //   name: "Old Fashioned",
+  //   ingredients: [
+  //     { measure:2.0,
+  //       unit: "oz",
+  //       ingredientName: "Rittenhouse Rye" },
+  //     { measure:0.3,
+  //       unit: "oz",
+  //       ingredientName: "Simple Syrup" },
+  //     { measure:2.0,
+  //       unit: "dash",
+  //       ingredientName: "Angostura Bitters" },
+  //     { measure:1.0,
+  //       unit: "each",
+  //       ingredientName: "Luxardo Cherry" }
+  //   ],
+  //   instructions: "Build in glass over ice",
+  //   description: "the old classic"
+  // };
+  // recipeObjectArray = [];
+  // recipeObjectArray.push(jungleBird);
+  // recipeObjectArray.push(oldFashioned);
+  recipeObjectArray = JSON.parse(localStorage.getItem('recipes'));
+  initializePage(recipeObjectArray);
+}
+
+function saveRecipes(){
+  localStorage.setItem('recipes', JSON.stringify(recipeObjectArray));
 }
