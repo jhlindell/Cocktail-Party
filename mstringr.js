@@ -1,7 +1,8 @@
+$("#pdfButton").on("click", getPdf);
 var currentParty = JSON.parse(localStorage.getItem('sessionPersistance'));
 var recipeList = currentParty.recipes;
 var masterList = [];
-calculateSimpleList();
+calculateMasterList();
 buildTable();
 // sample ingredient object
 //      { measure:1.5,
@@ -41,4 +42,8 @@ function buildTable() {
     $tr.append($ingredientName);
     $tbody.append($tr);
   }
+}
+
+function getPdf() {
+  
 }
