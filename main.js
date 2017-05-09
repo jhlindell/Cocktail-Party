@@ -19,7 +19,10 @@ var currentParty = {recipes:[]};
 
 //loads session from local storage
 clearRecipes();
-currentParty = JSON.parse(localStorage.getItem('sessionPersistance'));
+var tempObj = JSON.parse(localStorage.getItem('sessionPersistance'));
+if(tempObj !== null){
+  currentParty = tempObj;
+}
 if(currentParty.recipes === undefined){
   recipeObjectArray = [];
 } else {
