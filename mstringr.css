@@ -11,13 +11,3 @@
 @page {
   size:8.5in 11in;
 }
-
-#getPdf {
-  text-align: center;
-}
-
-.pdfDiv {
-
-  display: inline-block;
-  float:none;
-}

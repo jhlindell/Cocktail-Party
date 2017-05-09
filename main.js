@@ -1,7 +1,7 @@
 $("#addRecipeButton").on("click", addRecipeCard);
 $("#addIngButton").on("click", addIngredient);
 $("#recipeBox").on("click", updateRecipe);
-$(".loadButton").on("click", loadRecipes);
+$(".loadButton").on("click", callFirebase);
 $(".saveButton").on("click", saveRecipes);
 $(".clearButton").on("click", clearSession);
 var $recipes = $("#recipes");
@@ -12,9 +12,8 @@ var recipeCounter = 1;
 var recipeObjectArray = [];
 var removedCardNumbers = [];
 var partyNames = [];
-for (var key in localStorage) {
-  partyNames.push(key);
-}
+//load partyNames from firebase
+getPartyNames();
 var currentParty = {recipes:[]};
 
 //loads session from local storage
@@ -119,7 +118,6 @@ function buildRecipeObject() {
   recipeObj.description = $("#description").val();
   recipeObj.ingredients = [];
   let $ingredients = $("#ingredients").children();
-  //console.log($ingredients);
   $($ingredients).each(function() {
     if (!$(this).hasClass("ingClone")) {
       let ingredientObj = {};
@@ -202,57 +200,31 @@ function initializePage() {
 }
 
 //loading from local storage
-function loadRecipes() {
-  // var jungleBird = {
-  //   name: "Jungle Bird",
-  //   ingredients: [
-  //     { measure:1.5,
-  //       unit: "oz",
-  //       ingredientName: "Cruzan Blackstrap Rum" },
-  //     { measure:1.5,
-  //       unit: "oz",
-  //       ingredientName: "Pineapple Juice" },
-  //     { measure:1.0,
-  //       unit: "oz",
-  //       ingredientName: "Campari" },
-  //     { measure:0.5,
-  //       unit: "oz",
-  //       ingredientName: "Lime Juice" },
-  //     { measure:0.5,
-  //       unit: "oz",
-  //       ingredientName: "Simple Syrup" }
-  //   ],
-  //   instructions: "shake and serve over ice",
-  //   description: "the best tiki drink ever"
-  // };
-  // var oldFashioned = {
-  //   name: "Old Fashioned",
-  //   ingredients: [
-  //     { measure:2.0,
-  //       unit: "oz",
-  //       ingredientName: "Rittenhouse Rye" },
-  //     { measure:0.3,
-  //       unit: "oz",
-  //       ingredientName: "Simple Syrup" },
-  //     { measure:2.0,
-  //       unit: "dash",
-  //       ingredientName: "Angostura Bitters" },
-  //     { measure:1.0,
-  //       unit: "each",
-  //       ingredientName: "Luxardo Cherry" }
-  //   ],
-  //   instructions: "Build in glass over ice",
-  //   description: "the old classic"
-  // };
-  // recipeObjectArray = [];
-  // recipeObjectArray.push(jungleBird);
-  // recipeObjectArray.push(oldFashioned);
+function loadRecipes(party) {
   clearRecipes();
-  loadName = prompt(printPartyNames());
-  currentParty = JSON.parse(localStorage.getItem(loadName));
+  currentParty = party;
   recipeObjectArray = currentParty.recipes;
   initializePage();
   persistRecipes();
+}
+
+function callFirebase(){
+  let loadName = prompt(printPartyNames());
+  let firebaseGetString = "https://cocktails-bfa89.firebaseio.com/" + loadName + ".json";
+  $.getJSON(firebaseGetString, function(data){
+    currentParty = data;
+    loadRecipes(currentParty);
+  });
+}
+
+function getPartyNames(){
+  let firebaseGetString = "https://cocktails-bfa89.firebaseio.com/.json";
+  $.getJSON(firebaseGetString, function(data){
+      for (var key in data) {
+        partyNames.push(key);
+      }
+    });
+
 }
 
 function printPartyNames() {
@@ -272,13 +244,21 @@ function saveRecipes() {
   currentParty.guestCount = $("#guestCount").val();
   currentParty.recipes = recipeObjectArray;
   partyNames.push(currentParty.name);
-  localStorage.setItem(currentParty.name, JSON.stringify(currentParty));
+  let sessionString = JSON.stringify(currentParty);
+  let firebaseString = "https://cocktails-bfa89.firebaseio.com/" + currentParty.name + ".json";
+  $.ajax({
+    url: firebaseString, // your api url
+    method: 'PUT', // method is any HTTP method
+    data: sessionString, // data as js object
+    success: function() {}
+});
 }
 
 //populates recipebox with object info
 function populateRecipeBox() {
   let $selectedCard = $recipes.find(".panel-primary").parent();
   let recipeNumber = $selectedCard[0].dataset.recipe;
+  if (recipeNumber <= recipeObjectArray.length){
   let recipe = recipeObjectArray[recipeNumber - 1];
   if (recipe) {
     $("#drinkName").val(recipe.name);
@@ -294,6 +274,7 @@ function populateRecipeBox() {
       $clone.appendTo($ingredients);
     }
   }
+}
 }
 
 function persistRecipes() {

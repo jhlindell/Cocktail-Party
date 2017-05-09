@@ -45,5 +45,6 @@ function buildTable() {
 }
 
 function getPdf() {
-  
+  var urlString = 'http://api.pdflayer.com/api/convert?access_key=0d86446a19e94e119a864d555b4c6d91&document_url=https%3A%2F%2Fjhlcocktails.surge.sh%2Fmstringr.html';
+
 }
