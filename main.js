@@ -20,7 +20,11 @@ var currentParty = {recipes:[]};
 //loads session from local storage
 clearRecipes();
 currentParty = JSON.parse(localStorage.getItem('sessionPersistance'));
-recipeObjectArray = currentParty.recipes;
+if(currentParty.recipes === undefined){
+  recipeObjectArray = [];
+} else {
+  recipeObjectArray = currentParty.recipes;
+}
 if(currentParty.hasOwnProperty('recipes')){
   initializePage();
 }
