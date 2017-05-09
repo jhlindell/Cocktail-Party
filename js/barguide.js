@@ -1,6 +1,6 @@
 var currentParty = JSON.parse(localStorage.getItem('sessionPersistance'));
 recipeList = currentParty.recipes;
-let $tableBody = $("#tableBody");
+var $tableBody = $("#tableBody");
 populateGuide();
 
 function populateGuide() {
