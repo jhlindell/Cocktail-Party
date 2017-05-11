@@ -1,5 +1,50 @@
+body {
+  /*background-image: url('../images/wood_1.png');*/
+  /*background-image: url('../images/dark_wood.png');*/
+  /*background-image: url('../images/purty_wood.png');*/
+  background-image: url('../images/wood_pattern.png');
+  font-family: 'Amatic SC', cursive;
+}
+
+.navbar-default {
+  background-color: #613318;
+}
+.nav-pills li a{
+  color: white;
+  font-size: 30px;
+}
+
+.panel-primary {
+  background-image: url('../images/ricepaper_v3.png');
+}
+
+.panel-primary > .panel-heading {
+  background-color: #668D3C;
+}
+
+table > tbody > tr > td {
+  margin: 0 5px;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+  background-color: #B99C6B;
+  color: white;
+}
+
+.input-group-addon {
+  font-size: 25px;
+  background-color: #DBCA69;
+}
+
+.form-control {
+  font-size: 25px;
+  height: 40px;
+}
+
 #brand {
-  margin: 0;
+  margin: 0 10px;;
+  color: white;
+  font-size: 50px;
 }
 
 #recipes{
@@ -19,11 +64,36 @@
 .partyInfo {
   display: inline-table;
   float: none;
+  font-size: 25px;
+}
+
+.panel-title {
+  font-size: 25px;
+}
+
+.panel-default>.panel-heading {
+  background-color: #855723;
+  color: white;
+}
+
+.panel-default {
+  background-image: url('../images/ricepaper_v3.png');
+}
+
+.btn-default {
+  font-size: 20px;
+  background-color: #DBCA69;
 }
 
 #addRecipeButton {
   text-align: center;
   margin-bottom: 15px;
+  font-size: 25px;
+
+}
+
+#addRecipeButton > button {
+  background-color: #DBCA69;
 }
 
 #recipeBox{
@@ -39,6 +109,11 @@
 #addIngButton {
   margin-top: 10px;
   margin-bottom: 10px;
+  font-size: 20px;
+}
+
+#addIngButton > button {
+  background-color: #DBCA69;
 }
 
 .ingredient {
@@ -51,6 +126,11 @@
 
 .recipeButtonRow {
   margin-top: 10px;
+  font-size: 18px;
+}
+
+.recipeButtonRow > button {
+  background-color: #DBCA69;
 }
 
 #description {
@@ -59,9 +139,20 @@
 
 .recipeBody{
   text-align: center;
+  font-size: 25px;
 }
 
 .table-styling {
   display: inline-block;
   float: none;
+}
+
+.updateRecipeButton {
+  font-size: 20px;
+  background-color: #DBCA69;
+}
+
+td {
+  padding: 0 15px;
+
 }

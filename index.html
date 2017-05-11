@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"> -->
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css">
   <title>Cocktail Party</title>
 </head>
@@ -16,7 +16,7 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="nav navbar-right">
-          <h1 id="brand">Cocktail Party</h1>
+          <h1 id="brand">Cocktail Party!</h1>
         </div>
         <div>
           <ul class="nav nav-pills">
@@ -32,17 +32,17 @@
   <main>
     <div class="container">
       <div id="partyInfo" class="row">
-        <div class="col-md-1 loadButton">
-          <button class="btn btn-default">Load</button>
+        <div class="col-md-2">
+          <button class="btn btn-default loadButton">Load</button>
+          <button class="btn btn-default saveButton">Save</button>
+          <button class="btn btn-default clearButton">Clear</button>
         </div>
-        <div class="col-md-1 saveButton">
-          <button class="btn btn-default">Save</button>
+        <!-- <div class="col-md-1">
         </div>
-        <div class="col-md-1 clearButton">
-          <button class="btn btn-default">Clear</button>
-        </div>
+        <div class="col-md-1">
+        </div> -->
         <div class="input-group col-md-3 col-sm-12 partyInfo">
-          <span class="input-group-addon" >Party Name</span>
+          <span class="input-group-addon">Party Name</span>
           <input type="text" id="partyName" class="form-control" placeholder="Party Name" aria-describedby="partyName" required>
         </div>
         <div class="input-group col-md-2 col-sm-12 partyInfo">
@@ -51,7 +51,7 @@
         </div>
         <div class="input-group col-md-3 col-sm-12 partyInfo">
           <span class="input-group-addon">Number of Guests</span>
-          <input type="number" id="guestCount" class="form-control" placeholder="Number of Guests" aria-describedby="guestCount" required>
+          <input type="number" id="guestCount" class="form-control" placeholder="# of Guests" aria-describedby="guestCount" required>
         </div>
       </div>
       <div id="recipes" class="row">
@@ -93,33 +93,32 @@
       </div>
 
       <div id="recipeBox" class="row">
-        <div id="form">
-          <div class="col-md-7 col-sm-12 recipeBox" style="display: none;">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title">Recipe Information</h3>
-              </div>
-              <div class="panel-body">
-                <div class="row">
-                  <div class="input-group col-md-9 col-sm-12 partyInfo">
-                    <span class="input-group-addon" >Drink Name</span>
-                    <input type="text" id="drinkName" class="form-control" placeholder="Drink Name" aria-describedby="drinkName" required>
-                  </div>
+        <div class="col-md-7 col-sm-12 recipeBox" style="display: none;">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Recipe Information</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="input-group col-md-9 col-sm-12 partyInfo">
+                  <span class="input-group-addon">Drink Name</span>
+                  <input type="text" id="drinkName" class="form-control" placeholder="Drink Name" aria-describedby="drinkName" required>
                 </div>
-                <div class="row">
-                  <div>
-                    <h2>Ingredients:</h2>
-                  </div>
-                  <div id="ingredients">
-                    <div id="staticIngredient" class="ingredient">
-                      <div class="row">
-                        <div class="col-md-2">
-                          <label>Measure</label>
-                          <input type="text" class="form-control measure" placeholder="#">
-                        </div>
-                        <div class="col-md-2">
-                          <label>Unit</label>
-                          <select class="selectpicker form-control unit">
+              </div>
+              <div class="row">
+                <div>
+                  <h2>Ingredients:</h2>
+                </div>
+                <div id="ingredients">
+                  <div id="staticIngredient" class="ingredient">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <label>Measure</label>
+                        <input type="text" class="form-control measure" placeholder="#">
+                      </div>
+                      <div class="col-md-2">
+                        <label>Unit</label>
+                        <select class="selectpicker form-control unit">
                           <option>oz</option>
                           <option>cup</option>
                           <option>tsp</option>
@@ -128,21 +127,21 @@
                           <option>drops</option>
                           <option>each</option>
                         </select>
-                        </div>
-                        <div class="col-md-8">
-                          <label>Ingredient Name</label>
-                          <input type="text" class="form-control ingName" placeholder="Ingredient Name">
-                        </div>
+                      </div>
+                      <div class="col-md-8">
+                        <label>Ingredient Name</label>
+                        <input type="text" class="form-control ingName" placeholder="Ingredient Name">
                       </div>
                     </div>
+                  </div>
 
-                    <div class="ingredient ingClone" style="display: none;">
-                      <div class="row">
-                        <div class="col-md-2">
-                          <input type="text" class="form-control measure" placeholder="#">
-                        </div>
-                        <div class="col-md-2">
-                          <select class="selectpicker form-control unit">
+                  <div class="ingClone" style="display: none;">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <input type="text" class="form-control measure" placeholder="#">
+                      </div>
+                      <div class="col-md-2">
+                        <select class="selectpicker form-control unit">
                             <option>oz</option>
                             <option>cup</option>
                             <option>tsp</option>
@@ -151,30 +150,29 @@
                             <option>drops</option>
                             <option>each</option>
                           </select>
-                        </div>
-                        <div class="col-md-8">
-                          <input type="text" class="form-control ingName" placeholder="Ingredient Name">
-                        </div>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="text" class="form-control ingName" placeholder="Ingredient Name">
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div id="addIngButton">
-                    <button>Add Ingredient</button>
-                  </div>
+              </div>
+              <div class="row">
+                <div id="addIngButton">
+                  <button>Add Ingredient</button>
                 </div>
-                <div class="row">
-                  <label>Instructions</label>
-                  <textarea id="instructions" type="textarea" class="form-control" placeholder="Instructions"></textarea>
-                </div>
-                <div class="row">
-                  <label>Description</label>
-                  <textarea id="description" type="textarea" class="form-control" placeholder="Description"></textarea>
-                </div>
-                <div id="addDrink" class="row">
-                  <button class="updateRecipeButton">Update Recipe</button>
-                </div>
+              </div>
+              <div class="row">
+                <label>Instructions</label>
+                <textarea id="instructions" type="textarea" class="form-control" placeholder="Instructions"></textarea>
+              </div>
+              <div class="row">
+                <label>Description</label>
+                <textarea id="description" type="textarea" class="form-control" placeholder="Description"></textarea>
+              </div>
+              <div id="addDrink" class="row">
+                <button class="updateRecipeButton">Update Recipe</button>
               </div>
             </div>
           </div>

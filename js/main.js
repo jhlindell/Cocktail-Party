@@ -60,6 +60,7 @@ function addIngredient(event) {
   let $clone = $(".ingClone").clone();
   $clone.toggle();
   $clone.removeClass("ingClone");
+  $clone.addClass("ingredient");
   $clone.appendTo($ingredients);
 }
 
@@ -137,21 +138,23 @@ function populateCard(num) {
   let $recipeBody = $selectedCard.find(".recipeBody");
   $recipeBody.empty();
   //drink name
-  let $recipeNameDiv = $("<div>");
-  let $recipeNameH4 = $("<h4>");
-  $recipeNameH4.html(recipe.name);
-  $recipeNameDiv.append($recipeNameH4);
-  $recipeBody.append($recipeNameDiv);
+  $selectedCard.find(".panel-title").html(recipe.name);
   //ingredients
+  let $row = $("<div>");
+  $row.addClass("row");
+  let $col = $("<div>");
+  $col.addClass("col-md-12");
+  $row.append($col);
   let $table = $("<table>");
   $table.addClass("table-striped");
   $table.addClass("table-styling");
   let $tbody = $("<tbody>");
+  $col.append($table);
   $table.append($tbody);
   $(recipe.ingredients).each(function() {
     let $tr = $("<tr>");
     let $measure = $("<td>");
-    $measure.text(this.measure);
+    $measure.text(parseFloat(this.measure).toFixed(1));
     let $unit = $("<td>");
     $unit.text(this.unit);
     let $ingredientName = $("<td>");
@@ -161,10 +164,10 @@ function populateCard(num) {
     $tr.append($ingredientName);
     $tbody.append($tr);
   });
-  $recipeBody.append($table);
+  $recipeBody.append($row);
   //instructions
   let $instructions = $("<div>");
-  let $instH = $("<h5>");
+  let $instH = $("<h4>");
   $instH.html("Instructions:");
   let $instP = $("<p>");
   $instP.text(recipe.instructions);
@@ -173,7 +176,7 @@ function populateCard(num) {
   $recipeBody.append($instructions);
   //description
   let $description = $("<div>");
-  let $descH = $("<h5>");
+  let $descH = $("<h4>");
   $descH.html("Description");
   let $descP = $("<p>");
   $descP.text(recipe.description);
@@ -202,6 +205,11 @@ function initializePage() {
 //loading from local storage
 function loadRecipes(party) {
   clearRecipes();
+  if($recipeBox.is(":visible")){
+    $recipeBox.toggle();
+    let $buttons = $("#recipes .updateRecipe");
+    $buttons.toggle();
+  }
   currentParty = party;
   recipeObjectArray = currentParty.recipes;
   initializePage();
@@ -224,7 +232,6 @@ function getPartyNames(){
         partyNames.push(key);
       }
     });
-
 }
 
 function printPartyNames() {
@@ -264,10 +271,11 @@ function populateRecipeBox() {
     $("#drinkName").val(recipe.name);
     $("#instructions").val(recipe.instructions);
     $("#description").val(recipe.description);
-    $ingredients.find("#staticIngredient").remove();
+    $ingredients.find(".ingredient").remove();
     for (let j = 0; j < recipe.ingredients.length; j++) {
       let $clone = $(".ingClone").clone();
       $clone.removeClass("ingClone");
+      $clone.addClass("ingredient");
       $clone.find(".measure").val(recipe.ingredients[j].measure);
       $clone.find(".ingName").val(recipe.ingredients[j].ingredientName);
       $clone.toggle();
@@ -278,6 +286,10 @@ function populateRecipeBox() {
 }
 
 function persistRecipes() {
+  currentParty.name = $("#partyName").val();
+  currentParty.date = $("#partyDate").val();
+  currentParty.guestCount = $("#guestCount").val();
+  currentParty.recipes = recipeObjectArray;
   localStorage.setItem('sessionPersistance', JSON.stringify(currentParty));
 }
 

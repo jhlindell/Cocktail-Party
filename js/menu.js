@@ -4,12 +4,13 @@ var $menuBody = $("#menuBody");
 populateMenu();
 
 function populateMenu() {
+  $("partyInformation");
   recipeList.forEach(function(recipe) {
     let $recipeTr = $("<tr>");
     let $recipeTd = $("<td>");
     $recipeTr.append($recipeTd);
     let $recipeNameDiv = $("<div>");
-    let $recipeNameH = $("<h3>");
+    let $recipeNameH = $("<h2>");
     $recipeNameH.html(recipe.name);
     $recipeNameDiv.append($recipeNameH);
     $recipeTd.append($recipeNameDiv);

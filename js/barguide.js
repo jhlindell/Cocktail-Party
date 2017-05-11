@@ -9,7 +9,7 @@ function populateGuide() {
     let $recipeTd = $("<td>");
     $recipeTr.append($recipeTd);
     let $recipeNameDiv = $("<div>");
-    let $recipeNameH = $("<h3>");
+    let $recipeNameH = $("<h2>");
     $recipeNameH.html(recipe.name);
     $recipeNameDiv.append($recipeNameH);
     $recipeTd.append($recipeNameDiv);
@@ -35,7 +35,7 @@ function populateGuide() {
     $recipeTd.append($table);
     //instructions
     let $instructions = $("<div>");
-    let $instH = $("<h5>");
+    let $instH = $("<h3>");
     $instH.html("Instructions:");
     let $instP = $("<p>");
     $instP.text(recipe.instructions);
@@ -43,14 +43,14 @@ function populateGuide() {
     $instructions.append($instP);
     $recipeTd.append($instructions);
     //description
-    let $description = $("<div>");
-    let $descH = $("<h5>");
-    $descH.html("Description:");
-    let $descP = $("<p>");
-    $descP.text(recipe.description);
-    $description.append($descH);
-    $description.append($descP);
-    $recipeTd.append($description);
+    // let $description = $("<div>");
+    // let $descH = $("<h5>");
+    // $descH.html("Description:");
+    // let $descP = $("<p>");
+    // $descP.text(recipe.description);
+    // $description.append($descH);
+    // $description.append($descP);
+    // $recipeTd.append($description);
     $tableBody.append($recipeTr);
   });
 }

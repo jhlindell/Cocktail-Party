@@ -32,7 +32,7 @@ function buildTable() {
     let $tbody = $("#tableBody");
     let $tr = $("<tr>");
     let $measure = $("<td>");
-    $measure.text(masterList[i].measure);
+    $measure.text(masterList[i].measure.toFixed(1));
     let $unit = $("<td>");
     $unit.text(masterList[i].unit);
     let $ingredientName = $("<td>");

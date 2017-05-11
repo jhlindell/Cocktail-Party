@@ -1,9 +1,23 @@
-.ingredientTable {
-  text-align: center;
-  display: inline-block;
-  float: none;
+table {
+  background-image: url('../images/ricepaper_v3.png');
 }
 
 @page {
   size:8.5in 11in;
+}
+
+body {
+  font-size: 20px;
+}
+
+#title {
+  font-size:40px;
+}
+
+th {
+  text-align: center;
+}
+
+thead {
+  text
 }
