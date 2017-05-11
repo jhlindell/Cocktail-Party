@@ -149,6 +149,9 @@ function populateCard(num) {
   $table.addClass("table-striped");
   $table.addClass("table-styling");
   let $tbody = $("<tbody>");
+  let $scrollHint = $("<p>");
+  $scrollHint.text("scroll for full ingredient list");
+  $col.append($scrollHint);
   $col.append($table);
   $table.append($tbody);
   $(recipe.ingredients).each(function() {
@@ -168,7 +171,7 @@ function populateCard(num) {
   //instructions
   let $instructions = $("<div>");
   let $instH = $("<h4>");
-  $instH.html("Instructions:");
+  $instH.html("Instructions: ");
   let $instP = $("<p>");
   $instP.text(recipe.instructions);
   $instructions.append($instH);
