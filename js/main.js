@@ -35,6 +35,7 @@ if (currentParty.hasOwnProperty('recipes')) {
 
 //adds another recipe card to the #recipes row
 function addRecipeCard(event) {
+
   if (recipeCounter < 6) {
     recipeCounter++;
     let $clone = $("#cardClone").clone();
@@ -54,6 +55,7 @@ function addRecipeCard(event) {
     if (recipeCounter === 6) {
       $("#addRecipeButton").toggle();
     }
+    document.getElementById('pageBottom').scrollIntoView();
   }
 }
 
