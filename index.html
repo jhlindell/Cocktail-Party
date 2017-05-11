@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <link rel="stylesheet" href="css/main.css">
   <title>Cocktail Party</title>
 </head>
@@ -55,7 +56,7 @@
         </div>
       </div>
       <div id="recipes" class="row">
-        <div class="col-md-4 col-sm-12 recipeCards" data-recipe="1">
+        <div class="col-md-4 col-sm-12 recipeCards animated rollIn fadeOutRight" data-recipe="1">
           <div class="panel panel-default">
             <div class="panel-heading text-center">
               <h3 class="panel-title">Recipe 1</h3>
@@ -71,7 +72,7 @@
             </div>
           </div>
         </div>
-        <div id="cardClone" class="col-md-4 col-sm-12" style="display: none;">
+        <div id="cardClone" class="col-md-4 col-sm-12 animated rollIn fadeOutRight" style="display: none;">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">Recipe</h3>
@@ -93,7 +94,7 @@
       </div>
 
       <div id="recipeBox" class="row">
-        <div class="col-md-7 col-sm-12 recipeBox" style="display: none;">
+        <div class="col-md-7 col-sm-12 recipeBox animated slideInDown" style="display: none;">
           <div class="panel panel-primary">
             <div class="panel-heading">
               <h3 class="panel-title">Recipe Information</h3>
@@ -164,11 +165,11 @@
                 </div>
               </div>
               <div class="row">
-                <label>Instructions</label>
+                <label class="recipeBoxLabel">Instructions:</label>
                 <textarea id="instructions" type="textarea" class="form-control" placeholder="Instructions"></textarea>
               </div>
               <div class="row">
-                <label>Description</label>
+                <label class="recipeBoxLabel">Description:</label>
                 <textarea id="description" type="textarea" class="form-control" placeholder="Description"></textarea>
               </div>
               <div id="addDrink" class="row">
@@ -178,6 +179,8 @@
           </div>
         </div>
       </div>
+    </div>
+    <div id="pageBottom">
     </div>
   </main>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>

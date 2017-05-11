@@ -21,3 +21,8 @@ th {
 thead {
   text
 }
+
+tr {
+  -vendor-animation-duration: 1s;
+  /*-vendor-animation-delay: 1.5s;*/
+}

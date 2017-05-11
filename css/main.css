@@ -52,6 +52,8 @@ table > tbody > tr > td {
   display:inline-block;
   float: none;
   width: 33%;
+  -vendor-animation-duration: 3s;
+
 }
 
 #partyInfo {
@@ -95,6 +97,8 @@ table > tbody > tr > td {
 
 #recipeBox{
   text-align: center;
+  -vendor-animation-duration: 3s;
+
 }
 
 .recipeBox {
@@ -144,6 +148,14 @@ table > tbody > tr > td {
   float: none;
   height: 200px;
   overflow-y: scroll;
+}
+
+.recipeBoxLabel {
+  font-size: 25px;
+}
+
+#recipeBox > .recipeBox > .panel > .panel-body{
+  padding: 20px 40px 20px 40px;
 }
 
 .updateRecipeButton {

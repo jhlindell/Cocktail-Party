@@ -16,6 +16,15 @@ body {
   background-image: url('../images/ricepaper_v3.png');
 }
 
+td {
+  background-image: url('../images/ricepaper_v3.png');
+}
+
 h2 {
   text-decoration: underline;
+}
+
+.table-barStyle {
+  display: inline-block;
+  float: none;
 }

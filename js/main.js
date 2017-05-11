@@ -14,20 +14,22 @@ var removedCardNumbers = [];
 var partyNames = [];
 //load partyNames from firebase
 getPartyNames();
-var currentParty = {recipes:[]};
+var currentParty = {
+  recipes: []
+};
 
 //loads session from local storage
 clearRecipes();
 var tempObj = JSON.parse(localStorage.getItem('sessionPersistance'));
-if(tempObj !== null){
+if (tempObj !== null) {
   currentParty = tempObj;
 }
-if(currentParty.recipes === undefined){
+if (currentParty.recipes === undefined) {
   recipeObjectArray = [];
 } else {
   recipeObjectArray = currentParty.recipes;
 }
-if(currentParty.hasOwnProperty('recipes')){
+if (currentParty.hasOwnProperty('recipes')) {
   initializePage();
 }
 
@@ -91,6 +93,7 @@ function selectRecipeCard(event) {
   $target.addClass("panel-primary");
   $($recipeBox).toggle();
   populateRecipeBox();
+  document.getElementById('pageBottom').scrollIntoView();
   let $buttons = $("#recipes .updateRecipe");
   $buttons.toggle();
 }
@@ -197,8 +200,8 @@ function saveObject(recipeObj) {
 function initializePage() {
   let numRecipies = currentParty.recipes.length;
   for (let i = 0; i < numRecipies; i++) {
-      addRecipeCard();
-      populateCard(i + 1);
+    addRecipeCard();
+    populateCard(i + 1);
   }
   $("#partyName").val(currentParty.name);
   $("#partyDate").val(currentParty.date);
@@ -208,7 +211,7 @@ function initializePage() {
 //loading from local storage
 function loadRecipes(party) {
   clearRecipes();
-  if($recipeBox.is(":visible")){
+  if ($recipeBox.is(":visible")) {
     $recipeBox.toggle();
     let $buttons = $("#recipes .updateRecipe");
     $buttons.toggle();
@@ -219,22 +222,22 @@ function loadRecipes(party) {
   persistRecipes();
 }
 
-function callFirebase(){
+function callFirebase() {
   let loadName = prompt(printPartyNames());
   let firebaseGetString = "https://cocktails-bfa89.firebaseio.com/" + loadName + ".json";
-  $.getJSON(firebaseGetString, function(data){
+  $.getJSON(firebaseGetString, function(data) {
     currentParty = data;
     loadRecipes(currentParty);
   });
 }
 
-function getPartyNames(){
+function getPartyNames() {
   let firebaseGetString = "https://cocktails-bfa89.firebaseio.com/.json";
-  $.getJSON(firebaseGetString, function(data){
-      for (var key in data) {
-        partyNames.push(key);
-      }
-    });
+  $.getJSON(firebaseGetString, function(data) {
+    for (var key in data) {
+      partyNames.push(key);
+    }
+  });
 }
 
 function printPartyNames() {
@@ -261,31 +264,45 @@ function saveRecipes() {
     method: 'PUT', // method is any HTTP method
     data: sessionString, // data as js object
     success: function() {}
-});
+  });
 }
 
 //populates recipebox with object info
 function populateRecipeBox() {
   let $selectedCard = $recipes.find(".panel-primary").parent();
+  console.log($selectedCard);
   let recipeNumber = $selectedCard[0].dataset.recipe;
-  if (recipeNumber <= recipeObjectArray.length){
-  let recipe = recipeObjectArray[recipeNumber - 1];
-  if (recipe) {
-    $("#drinkName").val(recipe.name);
-    $("#instructions").val(recipe.instructions);
-    $("#description").val(recipe.description);
-    $ingredients.find(".ingredient").remove();
-    for (let j = 0; j < recipe.ingredients.length; j++) {
-      let $clone = $(".ingClone").clone();
-      $clone.removeClass("ingClone");
-      $clone.addClass("ingredient");
-      $clone.find(".measure").val(recipe.ingredients[j].measure);
-      $clone.find(".ingName").val(recipe.ingredients[j].ingredientName);
-      $clone.toggle();
-      $clone.appendTo($ingredients);
+  console.log(recipeNumber);
+  console.log(recipeObjectArray.length);
+  if (recipeNumber <= recipeObjectArray.length) {
+    let recipe = recipeObjectArray[recipeNumber - 1];
+    console.log(recipe);
+    if (recipe) {
+      $("#drinkName").val(recipe.name);
+      $("#instructions").val(recipe.instructions);
+      $("#description").val(recipe.description);
+      $ingredients.find(".ingredient").remove();
+      for (let j = 0; j < recipe.ingredients.length; j++) {
+        let $clone = $(".ingClone").clone();
+        $clone.removeClass("ingClone");
+        $clone.addClass("ingredient");
+        $clone.find(".measure").val(recipe.ingredients[j].measure);
+        $clone.find(".ingName").val(recipe.ingredients[j].ingredientName);
+        $clone.toggle();
+        $clone.appendTo($ingredients);
+      }
     }
+  } else {
+    $("#drinkName").val("");
+    $("#instructions").val("");
+    $("#description").val("");
+    $ingredients.find(".ingredient").remove();
+    let $clone = $(".ingClone").clone();
+    $clone.removeClass("ingClone");
+    $clone.addClass("ingredient");
+    $clone.toggle();
+    $clone.appendTo($ingredients);
   }
-}
 }
 
 function persistRecipes() {
@@ -307,7 +324,7 @@ function clearSession() {
   persistRecipes();
 }
 
-function clearRecipes(){
+function clearRecipes() {
   $("#recipes .recipeCards").remove();
   recipeCounter = 0;
   recipeObjectArray = [];

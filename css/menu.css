@@ -13,3 +13,8 @@ body {
 h2 {
   text-decoration: underline;
 }
+
+.table-menuStyle {
+  display: inline-block;
+  float: none;
+}

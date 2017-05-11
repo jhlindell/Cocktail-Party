@@ -1,9 +1,12 @@
 $("#pdfButton").on("click", getPdf);
+let $tbody = $("#tableBody");
 var currentParty = JSON.parse(localStorage.getItem('sessionPersistance'));
 var recipeList = currentParty.recipes;
 var masterList = [];
 calculateMasterList();
-buildTable();
+var numIngredients;
+var counterIndex = 0;
+var tableBuilder = window.setInterval(buildTable, 300);
 // sample ingredient object
 //      { measure:1.5,
 //       unit: "oz",
@@ -25,23 +28,27 @@ function calculateMasterList(array) {
        }
     }
   }
+  numIngredients = masterList.length;
 }
 
 function buildTable() {
-  for(let i = 0; i < masterList.length; i++) {
-    let $tbody = $("#tableBody");
     let $tr = $("<tr>");
+    $tr.addClass("animated");
+    $tr.addClass("slideInDown");
     let $measure = $("<td>");
-    $measure.text(masterList[i].measure.toFixed(1));
+    $measure.text(masterList[counterIndex].measure.toFixed(1));
     let $unit = $("<td>");
-    $unit.text(masterList[i].unit);
+    $unit.text(masterList[counterIndex].unit);
     let $ingredientName = $("<td>");
-    $ingredientName.text(masterList[i].ingredientName);
+    $ingredientName.text(masterList[counterIndex].ingredientName);
     $tr.append($measure);
     $tr.append($unit);
     $tr.append($ingredientName);
     $tbody.append($tr);
-  }
+    counterIndex++;
+    if(counterindex>numIngredients){
+      clearInterval(tableBuilder);
+    }
 }
 
 function getPdf() {

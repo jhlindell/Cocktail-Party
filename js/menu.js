@@ -16,7 +16,7 @@ function populateMenu() {
     $recipeTd.append($recipeNameDiv);
     //ingredients
     let $table = $("<table>");
-    $table.addClass("table-styling");
+    $table.addClass("table-menuStyle");
     let $tbody = $("<tbody>");
     $table.append($tbody);
     let $tr = $("<tr>");
