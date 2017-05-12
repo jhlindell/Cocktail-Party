@@ -59,9 +59,7 @@ table > tbody > tr > td {
 .recipeCards {
   display:inline-block;
   float: none;
-  width: 33%;
   -vendor-animation-duration: 3s;
-
 }
 
 #partyInfo {
