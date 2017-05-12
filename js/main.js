@@ -162,7 +162,7 @@ function populateCard(num) {
   $(recipe.ingredients).each(function() {
     let $tr = $("<tr>");
     let $measure = $("<td>");
-    $measure.text(parseFloat(this.measure).toFixed(1));
+    $measure.text(this.measure);
     let $unit = $("<td>");
     $unit.text(this.unit);
     let $ingredientName = $("<td>");
