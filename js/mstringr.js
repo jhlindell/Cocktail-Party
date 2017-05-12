@@ -46,7 +46,6 @@ function buildTable() {
   $tr.append($ingredientName);
   $tbody.append($tr);
   counterIndex++;
-  console.log(counterIndex + ", "+ numIngredients);
   if (counterIndex === numIngredients) {
     clearInterval(tableBuilder);
   }
