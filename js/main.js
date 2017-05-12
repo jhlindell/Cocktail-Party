@@ -235,6 +235,7 @@ function callFirebase() {
 }
 
 function getPartyNames() {
+  partyNames = [];
   let firebaseGetString = "https://cocktails-bfa89.firebaseio.com/.json";
   $.getJSON(firebaseGetString, function(data) {
     for (var key in data) {
@@ -268,6 +269,7 @@ function saveRecipes() {
     data: sessionString, // data as js object
     success: function() {}
   });
+  getPartyNames();
 }
 
 //populates recipebox with object info
