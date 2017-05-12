@@ -13,42 +13,43 @@ var tableBuilder = window.setInterval(buildTable, 300);
 //       ingredientName: "Cruzan Blackstrap Rum" }
 
 function calculateMasterList(array) {
-  for(let i = 0; i < recipeList.length; i++) {
-    for(let j = 0; j < recipeList[i].ingredients.length; j++) {
+  for (let i = 0; i < recipeList.length; i++) {
+    for (let j = 0; j < recipeList[i].ingredients.length; j++) {
       let ingredient = recipeList[i].ingredients[j];
       ingredient.measure *= currentParty.guestCount;
       masterList.push(ingredient);
     }
   }
-  for(let k = 0; k < masterList.length; k++) {
-    for(let l = k + 1; l < masterList.length; l++) {
-      if(masterList[k].ingredientName.toLowerCase() === masterList[l].ingredientName.toLowerCase() && masterList[k].unit === masterList[l].unit) {
+  for (let k = 0; k < masterList.length; k++) {
+    for (let l = k + 1; l < masterList.length; l++) {
+      if (masterList[k].ingredientName.toLowerCase() === masterList[l].ingredientName.toLowerCase() && masterList[k].unit === masterList[l].unit) {
         masterList[k].measure += masterList[l].measure;
         masterList.splice(l, 1);
-       }
+      }
     }
   }
   numIngredients = masterList.length;
 }
 
 function buildTable() {
-    let $tr = $("<tr>");
-    $tr.addClass("animated");
-    $tr.addClass("slideInDown");
-    let $measure = $("<td>");
-    $measure.text(masterList[counterIndex].measure.toFixed(1));
-    let $unit = $("<td>");
-    $unit.text(masterList[counterIndex].unit);
-    let $ingredientName = $("<td>");
-    $ingredientName.text(masterList[counterIndex].ingredientName);
-    $tr.append($measure);
-    $tr.append($unit);
-    $tr.append($ingredientName);
-    $tbody.append($tr);
-    counterIndex++;
-    if(counterindex>numIngredients){
-      clearInterval(tableBuilder);
-    }
+  let $tr = $("<tr>");
+  $tr.addClass("animated");
+  $tr.addClass("slideInDown");
+  let $measure = $("<td>");
+  $measure.text(masterList[counterIndex].measure.toFixed(1));
+  let $unit = $("<td>");
+  $unit.text(masterList[counterIndex].unit);
+  let $ingredientName = $("<td>");
+  $ingredientName.text(masterList[counterIndex].ingredientName);
+  $tr.append($measure);
+  $tr.append($unit);
+  $tr.append($ingredientName);
+  $tbody.append($tr);
+  counterIndex++;
+  console.log(counterIndex + ", "+ numIngredients);
+  if (counterIndex === numIngredients) {
+    clearInterval(tableBuilder);
+  }
 }
 
 function getPdf() {

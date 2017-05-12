@@ -47,7 +47,7 @@ function populateGuide() {
     $recipeTd.append($instructions);
     $tableBody.append($recipeTr);
     counterIndex++;
-    if(counterindex>numRecipes){
+    if(counterIndex === numRecipes){
       clearInterval(tableBuilder);
     }
 }
