@@ -3,7 +3,7 @@ recipeList = currentParty.recipes;
 var $tableBody = $("#tableBody");
 var numRecipes = currentParty.recipes.length;
 var counterIndex = 0;
-var tableBuilder = window.setInterval(populateGuide, 700);
+var tableBuilder = window.setInterval(populateGuide, 500);
 
 function populateGuide() {
     let $recipeTr = $("<tr>");
@@ -12,7 +12,7 @@ function populateGuide() {
     let $recipeTd = $("<td>");
     $recipeTr.append($recipeTd);
     let $recipeNameDiv = $("<div>");
-    let $recipeNameH = $("<h2>");
+    let $recipeNameH = $("<h1>");
     $recipeNameH.html(recipeList[counterIndex].name);
     $recipeNameDiv.append($recipeNameH);
     $recipeTd.append($recipeNameDiv);
@@ -45,7 +45,9 @@ function populateGuide() {
     $instructions.append($instH);
     $instructions.append($instP);
     $recipeTd.append($instructions);
+    //let $hr = $("<hr>");
     $tableBody.append($recipeTr);
+    //$tableBody.append($hr);
     counterIndex++;
     if(counterIndex === numRecipes){
       clearInterval(tableBuilder);

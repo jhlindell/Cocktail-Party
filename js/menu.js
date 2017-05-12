@@ -10,7 +10,7 @@ function populateMenu() {
     let $recipeTd = $("<td>");
     $recipeTr.append($recipeTd);
     let $recipeNameDiv = $("<div>");
-    let $recipeNameH = $("<h2>");
+    let $recipeNameH = $("<h1>");
     $recipeNameH.html(recipe.name);
     $recipeNameDiv.append($recipeNameH);
     $recipeTd.append($recipeNameDiv);

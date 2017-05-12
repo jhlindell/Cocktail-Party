@@ -86,6 +86,7 @@ function removeCard(event) {
   recipeObjectArray.splice(cardNumber - 1, 1);
   $target.remove();
   recipeCounter--;
+  persistRecipes();
 }
 
 //makes a recipe card active after its update recipe button was clicked

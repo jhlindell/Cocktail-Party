@@ -1,20 +1,43 @@
-body {
-  font-size: 25px;
+@media screen {
+  body {
+    font-size: 25px;
+
+  }
+  #title {
+    font-size: 50px;
+    margin-bottom: 10px;
+    text-decoration: none;
+  }
+  #menuBody {
+    background-image: url('../images/ricepaper_v3.png');
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.5);
+  }
+
+  h1{
+    text-decoration: underline;
+  }
+  .table-menuStyle {
+    display: inline-block;
+    float: none;
+  }
 }
 
-#title {
-  font-size: 40px;
-}
-
-#menuBody {
-  background-image: url('../images/ricepaper_v3.png');
-}
-
-h2 {
-  text-decoration: underline;
-}
-
-.table-menuStyle {
-  display: inline-block;
-  float: none;
+@media print {
+  body {
+    margin-left: 200px;
+    max-width: 700px;
+    font-size: 25px;
+  }
+  #title {
+    font-size: 50px;
+    margin-bottom: 10px;
+  }
+  .table-menuStyle {
+    display: inline-block;
+    float: none;
+    left: 50%;
+  }
+  h2 {
+    text-decoration: underline;
+  }
 }

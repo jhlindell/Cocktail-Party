@@ -15,6 +15,10 @@ body {
   background-image: url('../images/ricepaper_v3.png');
 }
 
+.panel {
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.5);
+}
+
 .panel-primary > .panel-heading {
   background-color: #668D3C;
 }

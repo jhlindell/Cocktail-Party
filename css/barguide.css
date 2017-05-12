@@ -9,19 +9,24 @@ body {
 }
 
 #title {
-  font-size: 40px;
+  font-size: 50px;
 }
 
 #tableBody {
   background-image: url('../images/ricepaper_v3.png');
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.5);
 }
 
 td {
   background-image: url('../images/ricepaper_v3.png');
 }
 
-h2 {
+/*h2 {
   text-decoration: underline;
+}*/
+
+tr {
+  border-bottom: 1px solid black;
 }
 
 .table-barStyle {
