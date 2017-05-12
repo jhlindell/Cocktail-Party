@@ -28,6 +28,10 @@ table > tbody > tr > td {
   color: white;
 }
 
+.btn-default:hover {
+  background-color: #668D3C;
+}
+
 .input-group-addon {
   font-size: 25px;
   background-color: #DBCA69;
@@ -95,6 +99,10 @@ table > tbody > tr > td {
   background-color: #DBCA69;
 }
 
+#addRecipeButton > button:hover {
+  background-color: #668D3C;
+}
+
 #recipeBox{
   text-align: center;
   -vendor-animation-duration: 3s;
@@ -117,6 +125,10 @@ table > tbody > tr > td {
   background-color: #DBCA69;
 }
 
+#addIngButton > button:hover {
+  background-color: #668D3C;
+}
+
 .ingredient {
   margin-bottom: 10px;
 }
@@ -132,6 +144,10 @@ table > tbody > tr > td {
 
 .recipeButtonRow > button {
   background-color: #DBCA69;
+}
+
+.recipeButtonRow > button:hover {
+  background-color: #668D3C;
 }
 
 #description {
@@ -161,6 +177,10 @@ table > tbody > tr > td {
 .updateRecipeButton {
   font-size: 20px;
   background-color: #DBCA69;
+}
+
+.updateRecipeButton:hover {
+  background-color: #668D3C;
 }
 
 td {
